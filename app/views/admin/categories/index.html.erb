@@ -1,2 +1,11 @@
-<h1>Admin::Categories#index</h1>
-<p>Find me in app/views/admin/categories/index.html.erb</p>
+
+<p>hobbyを新規作成する</p>
+
+<p>hobbyをカテゴリから選ぶ</p>
+<% @categories.each do |category| %>
+<%= attachment_image_tag category, :category_image, :fill, 350, 100, format: 'jpeg' %>
+<%= category.category_name %>
+<p>カテゴリを編集する</p>
+<% end %>
+
+<p>hobbyを新規作成する</p>

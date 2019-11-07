@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_094716) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
-    t.string "category_image"
+    t.string "category_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_094716) do
   create_table "hobbies", force: :cascade do |t|
     t.integer "category_id"
     t.string "hobby_name"
-    t.string "hobby_image"
+    t.string "hobby_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_094716) do
     t.string "last_name_ruby"
     t.string "first_name_ruby"
     t.string "nick_name"
-    t.string "user_icon"
+    t.string "user_icon_id"
     t.string "user_location"
     t.string "user_detailed_location"
     t.string "user_introduction"

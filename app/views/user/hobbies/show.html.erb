@@ -1,0 +1,18 @@
+
+<p>メインhobbyを設定する</p>
+<p>hobbyを新規作成する</p>
+<p>おすすめのhobby</p>
+<p><%= link_to 'カテゴリへ戻る', user_category_path(@hobby.category_id) %></p>
+
+<%= @hobby.hobby_name %>
+
+<div class="a clearfix">
+	<div class="user-hobby-show-image">
+		<%= attachment_image_tag @hobby, :hobby_image, :fill, 300, 300,  format: 'jpeg' %>
+	</div>
+</div>
+
+<%= @hobby.category.category_name %>
+
+<p>登録人数</p>
+<p>このhobbyを登録する</p>

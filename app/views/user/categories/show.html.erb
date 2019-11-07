@@ -1,2 +1,14 @@
-<h1>User::Categories#show</h1>
-<p>Find me in app/views/user/categories/show.html.erb</p>
+
+<p>メインhobbyを設定する</p>
+<p>hobbyを新規作成する</p>
+<p>おすすめのhobby</p>
+<p><%= link_to 'カテゴリ一覧へ戻る', user_categories_path %></p>
+
+<p><%= @category.category_name %>カテゴリのhobby一覧</p>
+<% @hobbies.each do |hobby| %>
+	<%= link_to user_hobby_path(hobby.id) do %>
+		<%= attachment_image_tag hobby, :hobby_image, :fill, 350, 100, format: 'jpeg' %>
+		<%= hobby.hobby_name %>
+	<% end %>
+<% end %>
+

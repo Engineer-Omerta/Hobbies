@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
   namespace :user do
+      get 'hobbies/main_hobby'
+      get 'users/follows'
+      get 'users/followers'
+      get 'users/mypage'
+      get 'users/unsubscribe'
       resources :categories, only: [:index, :show]
+      resources :hobbies, only: [:index, :new, :create, :show]
+      resources :users, only: [:show, :edit, :update]
   end
 
   namespace :admin do

@@ -1,0 +1,20 @@
+
+<h1>hobbyを新規作成する</h1>
+
+<%= form_for [@hobby], url: user_hobbies_path do |f| %>
+	<p>hobbyの名前</p>
+	<%= f.text_area :hobby_name, class: "hobby_new_box" %>
+
+	<p>hobbyのイメージ</p>
+	<%= f.attachment_field :hobby_image %>
+
+	<p>hobbyのカテゴリ</p>
+	<%= f.collection_select :category_id, Category.all, :id, :category_name, :prompt => "カテゴリを選択" %>
+
+	<%= f.submit '作成する', class:"hobby-submit" %>
+<% end %>
+
+<p>※hobby名は20文字以内で入力してください。</p>
+<p>※カテゴリはhobbyの内容を表すものを選択してください。</p>
+<p>※作成する前に、作成のルールをお読みください。</p>
+

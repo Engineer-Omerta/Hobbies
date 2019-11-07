@@ -1,3 +1,13 @@
+
 <h1>カテゴリ新規追加</h1>
-<p>カテゴリの名前</p>
-<p>カテゴリのイメージ</p>
+
+
+<%= form_for [@category], url: admin_categories_path do |f| %>
+	<p>カテゴリの名前</p>
+	<%= f.text_area :category_name, class: "category_new_box" %>
+
+	<p>カテゴリのイメージ</p>
+	<%= f.attachment_field :category_image %>
+
+	<%= f.submit '送信する', class:"category-submit" %>
+<% end %>
