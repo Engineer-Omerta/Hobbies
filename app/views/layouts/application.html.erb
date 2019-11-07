@@ -10,6 +10,51 @@
   </head>
 
   <body>
-    <%= yield %>
+      <header>
+          <% if request.path_info.include?('user') %>
+          <div class="user-header">
+              <%= link_to 'Hobbies', "" %>
+              <nav>
+                  <% if user_signed_in? %>
+                      <ul class="nav-list">
+                          <li class="nav-list-item">
+                              <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", "" %>
+                          </li>
+                          <li class="nav-list-item">
+                              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                          </li>
+                          <li class="nav-list-item">
+                              <%= link_to "お問い合わせ", "" %>
+                          </li>
+                      </ul>
+                  <% else %>
+                      <ul class="nav-list">
+                          <li class="nav-list-item">
+                              <%= link_to "ログイン", new_user_session_path %>
+                          </li>
+                          <li class="nav-list-item">
+                              <%= link_to "新規会員登録", new_user_registration_path %>
+                          </li>
+                          <li class="nav-list-item">
+                              <%= link_to "お問い合わせ", "" %>
+                          </li>
+                      </ul>
+                  <% end %>
+              </nav>
+          </div>
+
+          <% elsif request.path_info.include?('admin') %>
+              <div class="admin-header">
+                  <%= link_to 'Hobbies', "" %>
+                      <% if admin_signed_in? %>
+                          <div class="admin-nav">
+                              <p><b><%= link_to "管理者としてログイン中　ログアウト", destroy_admin_session_path, method: :delete %></b></p>
+                          </div>
+                      <% end %>
+              </div>
+          <% end %>
+
+      </header>
+      <%= yield %>
   </body>
 </html>
