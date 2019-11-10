@@ -18,6 +18,7 @@ class User::HobbiesController < ApplicationController
 
   def show
     @hobby = Hobby.find(params[:id])
+    @user_hobbies = UserHobby.where(hobby_id: @hobby.id)
   end
 
   def main_hobby

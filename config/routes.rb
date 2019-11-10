@@ -6,9 +6,16 @@ Rails.application.routes.draw do
       get 'users/followers'
       get 'users/mypage'
       get 'users/unsubscribe'
+      resources :users, only: [:show, :edit, :update] do
+        resource :relationships, only: [:create, :destroy]
+        get :follows, on: :member
+        get :followers, on: :member
+        #on memberと書く事で/users/:id/followingsというURLになる？？
+      end
+      resources :hobbies, only: [:index, :new, :create, :show] do
+        resources :user_hobbies, only: [:create, :destroy]
+      end
       resources :categories, only: [:index, :show]
-      resources :hobbies, only: [:index, :new, :create, :show]
-      resources :users, only: [:show, :edit, :update]
   end
 
   namespace :admin do

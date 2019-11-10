@@ -8,11 +8,29 @@
 
 <div class="a clearfix">
 	<div class="user-hobby-show-image">
-		<%= attachment_image_tag @hobby, :hobby_image, :fill, 300, 300,  format: 'jpeg' %>
+		<%= attachment_image_tag @hobby, :hobby_image %>
 	</div>
 </div>
 
 <%= @hobby.category.category_name %>
 
-<p>登録人数</p>
-<p>このhobbyを登録する</p>
+<p>登録人数　<%= @hobby.user_hobbies.count %>人</p>
+
+<% if @hobby.favorited_by?(current_user) %>
+    <%= link_to user_hobby_user_hobby_path(@hobby), method: :delete do %>
+      <p>このhobbyを解除する</p>
+    <% end %>
+<% else %>
+    <%= link_to user_hobby_user_hobbies_path(@hobby), method: :post do %>
+      <p>このhobbyを登録する</p>
+    <% end %>
+<% end %>
+
+<% @user_hobbies.each do |user_hobby| %>
+	<tr>
+		<td><p><%= attachment_image_tag user_hobby.user.user_icon, :fill, 60, 60, fallback: "no_image.jpg" %></p></td>
+		<td><%= user_hobby.user.nick_name %></td>
+		<td><p><%= user_hobby.user.user_location %>で活動中</p></td>
+	</tr>
+
+	<% end %>

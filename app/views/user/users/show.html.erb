@@ -1,2 +1,35 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+
+<%= @user.nick_name %>
+
+<p>お気に入りに追加する</p>
+
+<p>メインhobby</p>
+
+<p>活動場所</p>
+<%= @user.user_location %>
+
+<p>スタンス</p>
+<%= @user.user_stance %>
+
+
+
+<% if current_user != @user %>
+	<% if @user.followed_by?(current_user) %>
+		<p><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
+	<% else %>
+		<p><%=link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
+	<% end %>
+<% end %>
+
+
+
+
+<p>自己紹介</p>
+<%= @user.user_introduction %>
+<p>詳細な自己紹介</p>
+<%= @user.user_detailed_introduction %>
+
+<p>hobby</p>
+<% @user.user_hobbies.each do |user_hobby| %>
+	<%= user_hobby.hobby.hobby_name %>
+<% end %>
