@@ -72,3 +72,7 @@ gem 'pry-byebug'
 gem "hirb"
 gem "hirb-unicode"
 gem "mini_magick"
+
+group :production do
+  gem 'mysql2'
+end
