@@ -2,6 +2,7 @@ class User::RelationshipsController < ApplicationController
   def create
   	follow = current_user.active_relationships.build(follower_id: params[:user_id])
     follow.save
+    #followとは？ここに入れる変数は何でもいい。
     redirect_back fallback_location: request.referrer
     #この記述で一つ前のURLを返す
   end

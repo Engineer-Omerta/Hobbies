@@ -1,15 +1,21 @@
 
 <p>メインhobbyを設定する</p>
-<p>hobbyを新規作成する</p>
+<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
 <p>おすすめのhobby</p>
+
+<p>hobbyを検索する</p>
+<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
+     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
+<% end %> <!-- 検索フォームのend -->
 
 <p>hobbyをカテゴリから選ぶ</p>
 <% @categories.each do |category| %>
 	<%= link_to user_category_path(category.id) do %>
-		<%= attachment_image_tag category, :category_image, :fill, 350, 100, format: 'jpeg' %>
+	<div class ="category-box">
+		<%= attachment_image_tag category, :category_image %>
+	</div>
 		<%= category.category_name %>
 	<% end %>
-<p>カテゴリを編集する</p>
 <% end %>
 
-<p>hobbyを新規作成する</p>

@@ -31,6 +31,8 @@ class User::HobbiesController < ApplicationController
   end
 
   def search
+    @hobbies = Hobby.search(params[:search])
+    #Viewのformでユーザーが入力したパラメータをモデルに渡す
   end
 
   private

@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
   namespace :user do
+      get 'hobbies/search' => 'hobbies#search', as:'hobby_search'
+      get 'home/top'
+      get 'home/hobby'
+      get 'home/location'
       get 'hobbies/main_hobby'
       get 'users/follows'
       get 'users/followers'
       get 'users/mypage'
       get 'users/unsubscribe'
+      resources :home, only: [:index]
       resources :users, only: [:show, :edit, :update] do
         resource :relationships, only: [:create, :destroy]
         get :follows, on: :member

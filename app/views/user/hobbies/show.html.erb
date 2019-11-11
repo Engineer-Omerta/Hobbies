@@ -1,8 +1,14 @@
 
 <p>メインhobbyを設定する</p>
-<p>hobbyを新規作成する</p>
+<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
 <p>おすすめのhobby</p>
-<p><%= link_to 'カテゴリへ戻る', user_category_path(@hobby.category_id) %></p>
+<p><%= link_to 'カテゴリへ戻る', user_category_path %></p>
+
+<p>hobbyを検索する</p>
+<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
+     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
+<% end %> <!-- 検索フォームのend -->
 
 <%= @hobby.hobby_name %>
 
@@ -27,10 +33,13 @@
 <% end %>
 
 <% @user_hobbies.each do |user_hobby| %>
-	<tr>
-		<td><p><%= attachment_image_tag user_hobby.user.user_icon, :fill, 60, 60, fallback: "no_image.jpg" %></p></td>
-		<td><%= user_hobby.user.nick_name %></td>
-		<td><p><%= user_hobby.user.user_location %>で活動中</p></td>
-	</tr>
+	<div class="user-box">
+		<tr>
+			<td><p><%= attachment_image_tag user_hobby.user, :user_icon, :fill, 60, 60, fallback: "no_image.jpg" %></p></td>
+			<td><%= user_hobby.user.nick_name %></td>
+			<td><p><%= user_hobby.user.user_location %>で活動中</p></td>
+			<td><%= link_to truncate("#{user_hobby.user.user_introduction}", length: 20, omission:"..."), user_user_path(user_hobby.user) %></td>
+		</tr>
+	</div>
 
-	<% end %>
+<% end %>
