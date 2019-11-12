@@ -9,5 +9,6 @@
 		<% end %>
 		<%= user.nick_name %>
 		<p><%= user.user_location %>で活動中</p>
+		<p><%= link_to truncate("#{user.user_introduction}", length: 20, omission:"..."), user_user_path(user) %></p>
 	</div>
 <% end %>

@@ -15,6 +15,21 @@
 <% if current_user != @user %>
 	<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %> <!-- 両方がフォローしている場合を検索 -->
 		<p>マッチング済み</p>
+
+		<% if @isRoom == true %> <!-- Roomが存在しているか、存在していないかの条件分岐 -->
+			<p><a href="/user/rooms/<%= @roomId %>">チャットルームへ</a></p>
+		<% else %>
+			<%= form_for(@room, url: user_rooms_path) do |f| %>
+			<!-- チャットルームをcreateするためには親モデルのRoomsテーブルと、子モデルのEntriesテーブル両方にroomのレコードを保存する必要がある
+				form_forで親モデルroomの情報をfとして保存、fields_forで子モデルentryの情報をeとして保存 -->
+				<%= fields_for @entry do |e| %>
+					<%= e.hidden_field :user_id, :value=> @user.id %>
+					<!-- Entriesテーブルのレコードにはuser_idを送る必要がある？？ので、hidden_fieldでvalueを使って@user.idを送る -->
+				<% end %>
+				<%= f.submit "チャットを始める" %>
+			<% end %>
+		<% end %>
+
 	<% elsif Relationship.find_by(following_id: current_user.id, follower_id: @user.id) %> <!-- 自分が一方的にフォローしている場合を検索 -->
 		<p><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
 	<% else %> <!-- その他。つまり相手が一方的にフォローしている、又は両方ともフォローしていない -->

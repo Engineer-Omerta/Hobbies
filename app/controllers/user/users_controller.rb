@@ -2,7 +2,30 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    #DM機能
+    #Entryモデル内にcurrent_userと今のshowページのユーザーのIDがあるかを確認する記述
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+
+    #既にroomが作られているのか、作られていないのかを条件分岐させる
+    unless @user.id == current_user.id #ユーザーが自分の時は以下を出さない様にする
+      @currentUserEntry.each do |cu| #current_userのEntryを全て取り出す
+        @userEntry.each do |u| #@userのEntryを全て取り出す
+          if cu.room_id == u.room_id then #取り出した互いのEntryのroom_idが共通していれば下記を実行する (thenとは条件式がtrueなら下記を実行するという意味)
+            @isRoom = true #roomがない場合は、これがfalseとなる。falseならばRoomを作成する つまりRoomを作成する為に必要な記述
+            @roomId = cu.room_id #互いのroom_idが共通していればroom_idにそのidを入れてやる
+          end
+        end
+      end
+      unless @isRoom #@isRoomがfalseの時は下記を実行する
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
+
+
 
   def edit
     @user = User.find(params[:id])

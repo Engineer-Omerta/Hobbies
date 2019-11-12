@@ -13,33 +13,35 @@
       <header>
           <% if request.path_info.include?('user') %>
           <div class="user-header">
-              <%= link_to 'Hobbies', user_categories_path %>
+              <div class="logo">
+                  <%= link_to 'Hobbies', user_categories_path, :style=>"color:white;" %>
+              </div>
               <nav>
                   <% if user_signed_in? %>
                       <ul class="nav-list">
                           <li class="nav-list-item">
-                              <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", edit_user_user_path(current_user) %>
+                              <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", edit_user_user_path(current_user), :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
-                              <%= link_to "マッチング一覧", matches_user_user_path(current_user) %>
+                              <%= link_to "マッチング一覧", matches_user_user_path(current_user), :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
-                              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "" %>
+                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
                           </li>
                       </ul>
                   <% else %>
                       <ul class="nav-list">
                           <li class="nav-list-item">
-                              <%= link_to "ログイン", new_user_session_path %>
+                              <%= link_to "ログイン", new_user_session_path, :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
-                              <%= link_to "新規会員登録", new_user_registration_path %>
+                              <%= link_to "新規会員登録", new_user_registration_path, :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "" %>
+                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
                           </li>
                       </ul>
                   <% end %>
@@ -51,7 +53,7 @@
                   <%= link_to 'Hobbies', "" %>
                       <% if admin_signed_in? %>
                           <div class="admin-nav">
-                              <p><b><%= link_to "管理者としてログイン中　ログアウト", destroy_admin_session_path, method: :delete %></b></p>
+                              <p><b><%= link_to "管理者としてログイン中　ログアウト", destroy_admin_session_path, method: :delete, :style=>"color:white;" %></b></p>
                           </div>
                       <% end %>
               </div>
@@ -61,5 +63,8 @@
       <div class = "container">
           <%= yield %>
       </div>
+      <footer>
+          <div class="footer-text">©2019 Hobbies</div>
+      </footer>
   </body>
 </html>

@@ -1,2 +1,27 @@
-<h1>User::Rooms#show</h1>
-<p>Find me in app/views/user/rooms/show.html.erb</p>
+
+<h1><%= link_to "＜　#{@partner.nick_name}", user_user_path(@partner.id) %></h1>
+<% @entries.each do |e| %> <!-- ユーザーの名前など情報をとってくる -->
+	<h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.nick_name %>さん</a></strong></h5>
+<% end %>
+
+<hr style="border-width: 1px 0 0 0; border-color: black; ">
+
+<% if @messages.present? %>
+	<% @messages.each do |m| %>
+		<%= attachment_image_tag m.user, :user_icon, :fill, 100, 100, fallback: "no_image.jpg" %>
+		<small><strong><a href="/users/<%= m.user_id %>"><%= m.user.nick_name %></a></strong></small>
+		<strong><%= m.message %></strong>
+		<%= m.created_at.strftime("%m/%d %H:%M")%>
+		<hr>
+	<% end %>
+<% else %>
+	<h3 class="text-center">メッセージはまだありません</h3>
+<% end %>
+
+<%= form_for(@message, url: user_messages_path) do |f| %>
+	<%= f.text_field :message, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
+	<%= f.hidden_field :room_id, :value => @room.id %>
+	<!--　どのチャットルームのメッセージが判断するために、f.hidden_fieldで：room_idのバリューとして、そのチャットルームでのidを取得 -->
+	<br>
+	<%= f.submit "投稿する" %>
+<% end %>

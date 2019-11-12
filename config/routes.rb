@@ -24,8 +24,8 @@ Rails.application.routes.draw do
         resources :user_hobbies, only: [:create, :destroy]
       end
       resources :categories, only: [:index, :show]
-      resources :matches, only: [:index]
-      resources :rooms, only: [:show, :create]
+      resources :messages, :only => [:create]
+      resources :rooms, :only => [:create, :show, :index]
   end
 
   namespace :admin do
