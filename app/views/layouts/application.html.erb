@@ -21,6 +21,9 @@
                               <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", edit_user_user_path(current_user) %>
                           </li>
                           <li class="nav-list-item">
+                              <%= link_to "マッチング一覧", matches_user_user_path(current_user) %>
+                          </li>
+                          <li class="nav-list-item">
                               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
                           </li>
                           <li class="nav-list-item">

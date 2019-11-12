@@ -14,10 +14,16 @@ class User::UsersController < ApplicationController
     redirect_back fallback_location: request.referrer
   end
 
+  def matches
+    @users = current_user.followings && current_user.followers
+  end
+
   def follows
+    @users = current_user.followings
   end
 
   def followers
+    @users = current_user.followers
   end
 
   def mypage
