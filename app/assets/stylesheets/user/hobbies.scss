@@ -2,10 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.user-hobby-show-image img {
-	width : 20%;
-	height: 20%;
+
+.search{
+	margin-bottom: 30px;
 }
+
+.user-hobby-show-image{
+	text-align: center;
+	width : 500px;
+	height: 400px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.user-hobby-show-image img {
+  	max-width : 100%;
+  	max-height: 100%;
+  	object-fit: contain;
+  	position: absolute;
+    top: 50%; /*親要素を起点に上から50%*/
+    left: 50%;  /*親要素を起点に左から50%*/
+    transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+    -webkit-transform: translateY(-50%) translateX(-50%);
+}
+
 .user-box{
 	border: 1px black solid;
+}
+
+.hobby-name-panel{
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 500px;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: white;/*文字色*/
+  background:#6495ed;
+  border-radius: 10px;/*角の丸み*/
+}
+.category-name{
+	text-align: right;
+	font-size: 17px;
 }

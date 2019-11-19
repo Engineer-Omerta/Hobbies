@@ -1,45 +1,60 @@
 
-<p>メインhobbyを設定する</p>
-<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
-<p>おすすめのhobby</p>
-<p><%= link_to 'カテゴリへ戻る', user_category_path %></p>
-
-<p>hobbyを検索する</p>
-<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
-     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
-<% end %> <!-- 検索フォームのend -->
-
-<%= @hobby.hobby_name %>
-
-<div class="a clearfix">
-	<div class="user-hobby-show-image">
-		<%= attachment_image_tag @hobby, :hobby_image %>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
+		<p><%= link_to 'カテゴリへ戻る', user_categories_path%></p>
 	</div>
 </div>
 
-<%= @hobby.category.category_name %>
-
-<p>登録人数　<%= @hobby.user_hobbies.count %>人</p>
-
-<% if @hobby.favorited_by?(current_user) %>
-    <%= link_to user_hobby_user_hobby_path(@hobby), method: :delete do %>
-      <p>このhobbyを解除する</p>
-    <% end %>
-<% else %>
-    <%= link_to user_hobby_user_hobbies_path(@hobby), method: :post do %>
-      <p>このhobbyを登録する</p>
-    <% end %>
-<% end %>
-
-<% @user_hobbies.each do |user_hobby| %>
-	<div class="user-box">
-		<tr>
-			<td><p><%= attachment_image_tag user_hobby.user, :user_icon, :fill, 60, 60, fallback: "no_image.jpg" %></p></td>
-			<td><%= user_hobby.user.nick_name %></td>
-			<td><p><%= user_hobby.user.user_location %>で活動中</p></td>
-			<td><%= link_to truncate("#{user_hobby.user.user_introduction}", length: 20, omission:"..."), user_user_path(user_hobby.user) %></td>
-		</tr>
+<div class="row search clearfix">
+	<div class="col-lg-4">
 	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<%= form_tag user_hobby_search_path, method: 'get',class: 'form-box' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'form-search' %>
+			     <div class="form-submit">
+			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
+			     </div>
+			<% end %> <!-- 検索フォームのend -->
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
 
-<% end %>
+<div class="row clearfix">
+	<div class="col-lg-7">
+		<div class="user-hobby-show-image">
+			<%= attachment_image_tag @hobby, :hobby_image %>
+		</div>
+	</div>
+	<div class="col-lg-5">
+		<p class="hobby-name-panel">
+			<%= @hobby.hobby_name %>
+		</p>
+		<p class="category-name">
+			カテゴリ：<%= @hobby.category.category_name %>
+		</p>
+		<div id="user_hobbies_buttons">
+			<!--　ここで部分テンプレート_user_hobbyを呼び出す localsで部分テンプレートで使う変数を指定　部分テンプレート内でアクションが実行された際にjsファイルを呼び出す -->
+		 	<%= render partial: 'user_hobby', locals: { hobby: @hobby, user_hobbies: @user_hobbies} %>
+		</div>
+	</div>
+</div>
+
+<div class="row clearfix content-row">
+	<% @user_hobbies.each do |user_hobby| %>
+		<div class="col-lg-4 content-box">
+			<div class ="content">
+				<%= attachment_image_tag user_hobby.user, :user_icon, fallback: "no_image.jpg" %>
+			</div>
+			<div class="name">
+				<%= user_hobby.user.nick_name %>
+			</div>
+			<p><%= user_hobby.user.user_location %>で活動中</p>
+			<%= link_to truncate("#{user_hobby.user.user_introduction}", length: 20, omission:"..."), user_user_path(user_hobby.user) %>
+		</div>
+	<% end %>
+</div>

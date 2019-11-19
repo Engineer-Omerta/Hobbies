@@ -51,8 +51,93 @@ header{
     padding-left: 15px;
 }
 
+.back-menu{
+  margin-top: 15px;
+}
+
+.search-box{
+  text-align:center;
+  float: left;
+}
+.form-box{
+
+}
+.form-search{
+  float: left;
+  display: inline-block;
+}
+
+.headline{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.user_hobbies_buttons{
+  position: relative;
+}
+
+.hobby-registration{
+  width: 180px;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  color: white;/*文字色*/
+  background: #4682b4;
+  border: solid 2px #4682b4;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  margin-bottom: 5px;
+  float: left;
+}
+.hobby-unregister{
+  width: 220px;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  color: white;/*文字色*/
+  background: #dc143c;
+  border: solid 2px #dc143c;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  margin-bottom: 5px;
+  float: left;
+}
+.registered-people{
+  font-size: 15px;
+  padding: 0.5em 1em;
+  text-align: right;
+  position: absolute;
+  right: 1px;
+  float: left;
+}
+
+.content-row{
+  margin-top: 30px;
+}
+
+.content{
+  text-align: center;
+  width : 300px;
+  height: 300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.content img {
+  max-width : 100%;
+  max-height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%; /*親要素を起点に上から50%*/
+  left: 50%;  /*親要素を起点に左から50%*/
+  transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
+
+.name{
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
 
 footer{
+	position: absolute;
 	width: 100%;
 	height: 80px;
 	background-color: #4682b4;
@@ -61,8 +146,26 @@ footer{
 	margin-top: 100px;
 }
 
-.footer-text{
-	font-family: impact;
-	font-size: 20px;
+.c-Hobbies{
 	color: white;
+	font-size: 14px;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    list-style: none;
+    padding-left: 15px;
+}
+.footer-nav-list{
+    position: relative;
+    right: 30px;
+    top: 8px;
+}
+
+.footer-nav-list-item{
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    list-style: none;
+    padding-left: 15px;
 }

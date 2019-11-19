@@ -1,2 +1,31 @@
-<h1>User::Users#mypage</h1>
-<p>Find me in app/views/user/users/mypage.html.erb</p>
+
+<%= attachment_image_tag @user, :user_icon, :fill, 300, 300, fallback: "no_image.jpg", size:'300x300' %>
+<h3><%= @user.nick_name %></h3>
+
+<p>メインhobby</p>
+
+<p>活動場所</p>
+<%= @user.user_location %>
+
+<p>スタンス</p>
+<%= @user.user_stance %>
+
+<p><%= link_to 'プロフィール編集', edit_user_user_path(current_user) %></p>
+<p><%= link_to 'フォローしているユーザー一覧', follows_user_user_path(current_user) %></p>
+<p><%= link_to 'フォローされているユーザー一覧', followers_user_user_path(current_user) %></p>
+<p><%= link_to '所属グループの確認', "" %></p>
+<p><%= link_to 'お気に入りユーザー', "" %></p>
+
+<p>自己紹介</p>
+<%= @user.user_introduction %>
+
+<p>詳細な自己紹介</p>
+<%= @user.user_detailed_introduction %>
+
+<h3>hobby</h3>
+<% @user.user_hobbies.each do |user_hobby| %>
+	<div class="hobby-box">
+		<%= attachment_image_tag user_hobby.hobby, :hobby_image %>
+	</div>
+	<%= user_hobby.hobby.hobby_name %>
+<% end %>

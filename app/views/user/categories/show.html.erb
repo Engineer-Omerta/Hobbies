@@ -1,22 +1,46 @@
 
-<p>メインhobbyを設定する</p>
-<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
-<p>おすすめのhobby</p>
-<p><%= link_to 'カテゴリ一覧へ戻る', user_categories_path %></p>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
+		<p><%= link_to 'カテゴリ一覧へ戻る', user_categories_path %></p>
+	</div>
+</div>
 
-<p>hobbyを検索する</p>
-<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
-     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
-<% end %> <!-- 検索フォームのend -->
+<div class="row clearfix">
+	<div class="col-lg-4">
+	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<%= form_tag user_hobby_search_path, method: 'get',class: 'form-box' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'form-search' %>
+			     <div class="form-submit">
+			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
+			     </div>
+			<% end %> <!-- 検索フォームのend -->
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
 
-<p><%= @category.category_name %>カテゴリのhobby一覧</p>
-<% @hobbies.each do |hobby| %>
-	<%= link_to user_hobby_path(hobby.id) do %>
-		<div class="hobby-box">
-			<%= attachment_image_tag hobby, :hobby_image %>
+<div class="headline">
+	<p><%= @category.category_name %>カテゴリのhobby一覧</p>
+</div>
+
+<div class="row clearfix content-row">
+	<% @hobbies.each do |hobby| %>
+		<div class="col-lg-4 content-box">
+			<%= link_to user_hobby_path(hobby.id) do %>
+				<div class ="content">
+					<%= attachment_image_tag hobby, :hobby_image %>
+				</div>
+				<div class="name">
+					<%= hobby.hobby_name %>
+				</div>
+			<% end %>
 		</div>
-		<%= hobby.hobby_name %>
 	<% end %>
-<% end %>
+</div>
+
 

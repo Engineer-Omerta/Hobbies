@@ -2,7 +2,6 @@
 <p>メインhobbyを設定する</p>
 <p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
 <p>おすすめのhobby</p>
-<p><%= link_to 'カテゴリへ戻る', user_category_path %></p>
 
 <p>hobbyを検索する</p>
 <%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
@@ -10,23 +9,15 @@
      <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
 <% end %> <!-- 検索フォームのend -->
 
-<%= @random.each do |hobby| %>
-	<%= link_to user_hobby_path(hobby.id) do %>
-		<div class="hobby-box">
-			<%= attachment_image_tag hobby, :hobby_image %>
-		</div>
-	<h3>趣味　<%= hobby.hobby_name %>のユーザー</h3>
-	
+<% @randam_current_user_hobbies.each do |randam_hobby| %>
+	<li>
+		<p>趣味　<%= randam_hobby.hobby_name %>のユーザー</p>
+	</li>
 <% end %>
 
 
 
 
-<% @hobbies.each do |hobby| %>
-	<%= link_to user_hobby_path(hobby.id) do %>
-		<div class="hobby-box">
-			<%= attachment_image_tag hobby, :hobby_image %>
-		</div>
-		<%= hobby.hobby_name %>
-	<% end %>
-<% end %>
+
+
+

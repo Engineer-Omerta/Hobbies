@@ -20,7 +20,7 @@
                   <% if user_signed_in? %>
                       <ul class="nav-list">
                           <li class="nav-list-item">
-                              <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", edit_user_user_path(current_user), :style=>"color:white;" %>
+                              <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", user_users_mypage_path(current_user), :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
                               <%= link_to "マッチング一覧", matches_user_user_path(current_user), :style=>"color:white;" %>
@@ -63,8 +63,24 @@
       <div class = "container">
           <%= yield %>
       </div>
-      <footer>
-          <div class="footer-text">©2019 Hobbies</div>
+      <footer clearfix>
+          <ul class="footer-nav-list">
+              <li class="c-Hobbies">
+                  <p>ⓒ2019 Hobbies</p>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "ご利用にあたっての注意点", "", :style=>"color:white;" %>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "利用規約", "", :style=>"color:white;" %>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "プライバシーポリシー", "", :style=>"color:white;" %>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "hobby作成のルール", "", :style=>"color:white;" %>
+              </li>
+          </ul>
       </footer>
   </body>
 </html>

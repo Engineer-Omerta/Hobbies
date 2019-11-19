@@ -1,0 +1,13 @@
+
+<% unless hobby.user_hobby_user(current_user.id).blank? %> <!-- 既にhobbyが登録されているか条件分岐 （blankでなければ） -->
+	<%= link_to user_hobby_user_hobbies_path(hobby_id: hobby.id), method: :delete, remote: true do %>
+	<!--link_toでアクションが実行された際にjsファイルが実行され、その結果を再読み込みする事で再び条件分岐して表示が変わる -->
+		<p class="hobby-unregister">このhobbyの登録を解除する</p>
+	<% end %>
+		<p class="registered-people">登録人数　<%= @hobby.user_hobbies.count %>人</p>
+<% else %>
+	<%= link_to user_hobby_user_hobbies_path(hobby.id), method: :post, remote: true do %>
+		<p class="hobby-registration">このhobbyを登録する</p>
+	<% end %>
+		<p class="registered-people">登録人数　<%= @hobby.user_hobbies.count %>人</p>
+<% end %>

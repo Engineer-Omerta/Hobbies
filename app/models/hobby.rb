@@ -1,12 +1,17 @@
 class Hobby < ApplicationRecord
-	belongs_to :user, optional: true #Rail5からbelongs_toのデフォルトが関連先の値を検査するようになった。
-									 #Rails4と同様に関連先を検査しないようにするには、belongs_toにoptional: trueを付与すれば良い。
+
 	belongs_to :category
-	has_many :user_hobbies
+	has_many :user_hobbies, dependent: :destroy
+	delegate :thread, to: :users
 	attachment :hobby_image
 	def favorited_by?(user) #メソッドを定義しているだけなのでこの名前でいい。
           user_hobbies.where(user_id: user.id).exists?
     end
+
+    def user_hobby_user(user_id)
+   		user_hobbies.find_by(user_id: user_id)
+  	end
+
     def self.search(search) #selfとつけることでsearchはクラスメソッドとなる
     	#クラスメソッドはmodelクラスのレコードを検索するなどの用途や作成されたインスタンスの数を数えるなど、
     	#個々のインスタンスには紐付けずクラスに対して働きかけるメソッド

@@ -38,7 +38,8 @@ class User::UsersController < ApplicationController
   end
 
   def matches
-    @users = current_user.followings && current_user.followers
+    @users = current_user.followings & current_user.followers
+    #ここは&&では駄目。&である必要がある。配列式なので&&は使えない。使えるが効果が違うため。　"かつ"という意味で&&が使えるのはif文のような条件式のみ
   end
 
   def follows
@@ -50,6 +51,7 @@ class User::UsersController < ApplicationController
   end
 
   def mypage
+    @user = current_user
   end
 
   def unsubscribe

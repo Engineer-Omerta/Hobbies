@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :user_hobbies, dependent: :destroy
+  has_many :hobbies, through: :user_hobbies #top/indexでuser.hobbiesを可能にする
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
 

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         #on memberと書く事で/users/followingsというURLになる　 get 'users/follows'と同じ意味
       end
       resources :hobbies, only: [:index, :new, :create, :show] do
-        resources :user_hobbies, only: [:create, :destroy]
+        resource :user_hobbies, only: [:create, :destroy]
       end
       resources :categories, only: [:index, :show]
       resources :messages, :only => [:create]
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+      get 'home/top'
       resources :categories, only: [:index, :show, :new, :create, :edit, :update]
   end
 
