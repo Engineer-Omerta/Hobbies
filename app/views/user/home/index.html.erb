@@ -1,23 +1,52 @@
 
-<p>メインhobbyを設定する</p>
-<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
-<p>おすすめのhobby</p>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
+	</div>
+</div>
 
-<p>hobbyを検索する</p>
-<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
-     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
-<% end %> <!-- 検索フォームのend -->
+<div class="row search clearfix">
+	<div class="col-lg-4">
+	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'search-submit' %>
+			     <div class="search-box-submit">
+			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
+			     </div>
+			<% end %> <!-- 検索フォームのend -->
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
 
-<% @randam_current_user_hobbies.each do |randam_hobby| %>
-	<li>
-		<p>趣味　<%= randam_hobby.hobby_name %>のユーザー</p>
-	</li>
-<% end %>
-
-
-
-
+<div class="row content-row">
+	<% @randam_current_user_hobbies.each do |randam_hobby| %><!-- 今のユーザーのhobbyをランダムにとってくる -->
+		<h3>趣味　<%= randam_hobby.hobby_name %>のユーザー</h3>
+		<div class="hoge clearfix"><!-- ここのclearfixでhobbyごとに改行するように設定される -->
+			<% randam_hobby.users.each do |user_hobby| %><!-- 取ってきてるhobbyに紐付くユーザーをとってくる -->
+			<!-- ifの条件分岐でユーザーの数がn人なら空のcolを挿入など条件分岐させる？ -->
+				<div class="col-lg-4 content-box">
+					<div class ="content">
+						<%= link_to user_user_path(user_hobby) do %>
+							<%= attachment_image_tag user_hobby, :user_icon, fallback: "no_image.jpg" %>
+						<% end %>
+					</div>
+					<div class="name">
+						<%= link_to user_user_path(user_hobby) do %>
+							<%= user_hobby.nick_name %>
+						<% end %>
+					</div>
+					<p><%= user_hobby.user_location %>で活動中</p>
+					<%= link_to truncate("#{user_hobby.user_introduction}", length: 20, omission:"..."), user_user_path(user_hobby) %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>
 
 
 

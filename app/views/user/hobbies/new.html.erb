@@ -1,13 +1,27 @@
 
-<p>メインhobbyを設定する</p>
-<p>おすすめのhobby</p>
-<p><%= link_to 'カテゴリへ戻る', user_categories_path %></p>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'カテゴリへ戻る', user_categories_path%></p>
+	</div>
+</div>
 
-<p>hobbyを検索する</p>
-<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
-     <%= submit_tag "検索", :name => nil %><!-- :name => nilが意味不明 -->
-<% end %> <!-- 検索フォームのend -->
+<div class="row search clearfix">
+	<div class="col-lg-4">
+	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<%= form_tag user_hobby_search_path, method: 'get',class: 'search-box-form' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'form-search' %>
+			     <div class="search-box-submit">
+			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
+			     </div>
+			<% end %> <!-- 検索フォームのend -->
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
 
 <h1>hobbyを新規作成する</h1>
 

@@ -23,6 +23,9 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :following
   # 中間テーブルを介して「following」モデルのUser(フォローする側)を集めることを「followers」とrelationshipモデルで定義している
   attachment :user_icon
+
+  acts_as_paranoid
+
   def followed_by?(user)
     # 今自分(引数のuser)がフォローしようとしているユーザーが、フォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?

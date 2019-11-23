@@ -1,0 +1,19 @@
+
+<div class="row clearfix content-row">
+	<% @users.each do |user| %>
+		<div class="col-lg-4 content-box">
+			<div class ="content">
+				<%= link_to admin_user_path(user.id) do %>
+					<%= attachment_image_tag user, :user_icon, fallback: "no_image.jpg" %>
+				<% end %>
+			</div>
+			<div class="name">
+				<%= link_to admin_user_path(user.id) do %>
+					<%= user.nick_name %>
+				<% end %>
+			</div>
+			<p><%= user.user_location %>で活動中</p>
+			<%= link_to truncate("#{user.user_introduction}", length: 20, omission:"..."), admin_user_path(user) %>
+		</div>
+	<% end %>
+</div>

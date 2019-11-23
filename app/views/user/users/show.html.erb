@@ -1,58 +1,83 @@
 
-<%= attachment_image_tag @user, :user_icon, :fill, 300, 300, fallback: "no_image.jpg", size:'300x300' %>
-<h3><%= @user.nick_name %></h3>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+	</div>
+</div>
 
-<p>お気に入りに追加する</p>
+<div class="row clearfix">
+	<div class="col-lg-7">
+		<div class="user-show-image">
+			<%= attachment_image_tag @user, :user_icon, fallback: "no_image.jpg", size:'500x350' %>
+		</div>
+	</div>
+	<div class="col-lg-5">
+		<h3 class="user-name-panel">
+			<%= @user.nick_name %>
+		</h3>
+		<h3 class="user-info-panel">
+			<p>活動場所　<%= @user.user_location %></p>
+			<p>スタンス　<%= @user.user_stance %></p>
+		</h3>
+		<% if current_user != @user %>
+			<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %> <!-- 両方がフォローしている場合を検索 -->
+				<p>マッチング済み</p>
 
-<p>メインhobby</p>
-
-<p>活動場所</p>
-<%= @user.user_location %>
-
-<p>スタンス</p>
-<%= @user.user_stance %>
-
-<% if current_user != @user %>
-	<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %> <!-- 両方がフォローしている場合を検索 -->
-		<p>マッチング済み</p>
-
-		<% if @isRoom == true %> <!-- Roomが存在しているか、存在していないかの条件分岐 -->
-			<p><a href="/user/rooms/<%= @roomId %>">チャットルームへ</a></p>
-		<% else %>
-			<%= form_for(@room, url: user_rooms_path) do |f| %>
-			<!-- チャットルームをcreateするためには親モデルのRoomsテーブルと、子モデルのEntriesテーブル両方にroomのレコードを保存する必要がある
-				form_forで親モデルroomの情報をfとして保存、fields_forで子モデルentryの情報をeとして保存 -->
-				<%= fields_for @entry do |e| %>
-					<%= e.hidden_field :user_id, :value=> @user.id %>
-					<!-- Entriesテーブルのレコードにはuser_idを送る必要がある？？ので、hidden_fieldでvalueを使って@user.idを送る -->
+				<% if @isRoom == true %> <!-- Roomが存在しているか、存在していないかの条件分岐 -->
+					<a href="/user/rooms/<%= @roomId %>"><p class="chat-room">チャットルームへ</p></a>
+				<% else %>
+					<%= form_for(@room, url: user_rooms_path) do |f| %>
+					<!-- チャットルームをcreateするためには親モデルのRoomsテーブルと、子モデルのEntriesテーブル両方にroomのレコードを保存する必要がある
+						form_forで親モデルroomの情報をfとして保存、fields_forで子モデルentryの情報をeとして保存 -->
+						<%= fields_for @entry do |e| %>
+							<%= e.hidden_field :user_id, :value=> @user.id %>
+							<!-- Entriesテーブルのレコードにはuser_idを送る必要がある？？ので、hidden_fieldでvalueを使って@user.idを送る -->
+						<% end %>
+						<%= f.submit "チャットを始める" %>
+					<% end %>
 				<% end %>
-				<%= f.submit "チャットを始める" %>
+
+			<% elsif Relationship.find_by(following_id: current_user.id, follower_id: @user.id) %> <!-- 自分が一方的にフォローしている場合を検索 -->
+				<p><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
+			<% else %> <!-- その他。つまり相手が一方的にフォローしている、又は両方ともフォローしていない -->
+				<p><%=link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
 			<% end %>
 		<% end %>
-
-	<% elsif Relationship.find_by(following_id: current_user.id, follower_id: @user.id) %> <!-- 自分が一方的にフォローしている場合を検索 -->
-		<p><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
-	<% else %> <!-- その他。つまり相手が一方的にフォローしている、又は両方ともフォローしていない -->
-		<p><%=link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
-	<% end %>
-<% end %>
-
-<p>自己紹介</p>
-<%= @user.user_introduction %>
-
-<% if current_user != @user %>
-	<p>詳細な自己紹介</p>
-	<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %>
-		<%= @user.user_detailed_introduction %>
-	<% else %>
-		<p>この項目はマッチングしたら表示されます。</p>
-	<% end %>
-<% end %>
-
-<h3>hobby</h3>
-<% @user.user_hobbies.each do |user_hobby| %>
-	<div class="hobby-box">
-		<%= attachment_image_tag user_hobby.hobby, :hobby_image %>
 	</div>
-	<%= user_hobby.hobby.hobby_name %>
-<% end %>
+</div>
+
+<div class="row clearfix">
+	<div class="col-lg-1"></div>
+	<div class="col-lg-10">
+		<h4>自己紹介</h4>
+		<%= @user.user_introduction %>
+		<br>
+		<br>
+		<% if current_user != @user %>
+			<h4>詳細な自己紹介</h4>
+			<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %>
+				<%= @user.user_detailed_introduction %>
+			<% else %>
+				<p>この項目はマッチングしたら表示されます。</p>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-lg-1"></div>
+</div>
+
+<div class="row clearfix content-row">
+	<h3>hobby</h3>
+	<% @user.user_hobbies.each do |user_hobby| %>
+		<div class="col-lg-4 content-box">
+			<%= link_to user_hobby_path(user_hobby.hobby.id) do %>
+				<div class="content">
+					<%= attachment_image_tag user_hobby.hobby, :hobby_image %>
+				</div>
+				<div class="name">
+					<%= user_hobby.hobby.hobby_name %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>

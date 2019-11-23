@@ -3,8 +3,8 @@
 	<div class="col-lg-10">
 	</div>
 	<div class="col-lg-2 back-menu">
-		<p><%= link_to 'hobbyを新規作成する', new_user_hobby_path %></p>
-		<p><%= link_to 'カテゴリ一覧へ戻る', user_categories_path %></p>
+		<p><%= link_to 'トップへ戻る', admin_home_top_path %></p>
+		<p><%= link_to 'カテゴリへ戻る', admin_categories_path%></p>
 	</div>
 </div>
 
@@ -13,7 +13,7 @@
 <div class="row clearfix content-row">
 	<% @hobbies.each do |hobby| %>
 		<div class="col-lg-4 content-box">
-			<%= link_to user_hobby_path(hobby.id) do %>
+			<%= link_to admin_hobby_path(hobby.id) do %>
 				<div class ="content">
 					<%= attachment_image_tag hobby, :hobby_image %>
 				</div>

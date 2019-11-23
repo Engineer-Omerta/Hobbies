@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-      get 'hobbies/search' => 'hobbies#search', as:'hobby_search'
       get 'home/top'
+      get 'hobbies/search' => 'hobbies#search', as:'hobby_search'
       get 'home/hobby'
       get 'home/location'
       get 'hobbies/main_hobby'
       get 'users/mypage'
-      get 'users/unsubscribe'
+      get 'users/:id/unsubscribe' => 'users#unsubscribe', as:'user_unsubscribe'
+      get 'users/:id/delete' => 'users#delete', as: 'delete'
       resources :home, only: [:index]
       resources :users, only: [:show, :edit, :update] do
         resource :relationships, only: [:create, :destroy]
@@ -30,7 +31,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
       get 'home/top'
-      resources :categories, only: [:index, :show, :new, :create, :edit, :update]
+      get 'hobbies/search' => 'hobbies#search', as:'hobby_search'
+      get 'users/:id/delete' => 'users#delete', as: 'delete'
+      resources :users, only: [:index, :show, :edit, :destroy]
+      resources :hobbies, only: [:show, :edit, :update, :destroy]
+      resources :categories
   end
 
   devise_for :admins, controllers: {

@@ -4,6 +4,7 @@ class Hobby < ApplicationRecord
 	has_many :user_hobbies, dependent: :destroy
 	delegate :thread, to: :users
 	attachment :hobby_image
+	has_many :users, through: :user_hobbies #トップページでランダムなhobbyからそれに紐付くユーザーをとってくるのに必要な記述
 	def favorited_by?(user) #メソッドを定義しているだけなのでこの名前でいい。
           user_hobbies.where(user_id: user.id).exists?
     end

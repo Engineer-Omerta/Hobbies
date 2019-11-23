@@ -1,2 +1,46 @@
-<h1>Admin::Categories#show</h1>
-<p>Find me in app/views/admin/categories/show.html.erb</p>
+
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'トップへ戻る', admin_home_top_path %></p>
+		<p><%= link_to 'カテゴリへ戻る', admin_categories_path%></p>
+	</div>
+</div>
+
+<div class="row clearfix">
+	<div class="col-lg-4">
+	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<%= form_tag admin_hobby_search_path, method: 'get',class: 'form-box' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
+			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'form-search' %>
+			     <div class="form-submit">
+			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
+			     </div>
+			<% end %> <!-- 検索フォームのend -->
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
+
+<div class="headline">
+	<p><%= @category.category_name %>カテゴリのhobby一覧</p>
+</div>
+
+<div class="row clearfix content-row">
+	<% @hobbies.each do |hobby| %>
+		<div class="col-lg-4 content-box">
+			<%= link_to admin_hobby_path(hobby.id) do %>
+				<div class ="content">
+					<%= attachment_image_tag hobby, :hobby_image %>
+				</div>
+				<div class="name">
+					<%= hobby.hobby_name %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+

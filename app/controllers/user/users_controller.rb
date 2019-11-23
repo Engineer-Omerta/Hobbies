@@ -2,7 +2,6 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
     #DM機能
     #Entryモデル内にcurrent_userと今のshowページのユーザーのIDがあるかを確認する記述
     @currentUserEntry = Entry.where(user_id: current_user.id)
@@ -24,8 +23,6 @@ class User::UsersController < ApplicationController
       end
     end
   end
-
-
 
   def edit
     @user = User.find(params[:id])
@@ -55,6 +52,15 @@ class User::UsersController < ApplicationController
   end
 
   def unsubscribe
+  end
+
+  def delete
+    user = User.find(params[:id])
+    user_hobbies = user.user_hobbies #削除するユーザーのhobbyを取得
+    user.update(deleted_at: Time.now)
+    user.save
+    user_hobbies.destroy_all #削除するユーザーだけのhobby情報を削除
+    redirect_to root_path
   end
 
   private

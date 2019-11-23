@@ -14,6 +14,7 @@ class User::RoomsController < ApplicationController
     else
       redirect_back(fallback_location: root_path)
     end
+    render layout: false #application.html.erbを適用したくない時に使う
   end
 
   def create #users/show.html.erbのform_forの@roomで送られてきたパラメータを、ここで受け取りcreateする

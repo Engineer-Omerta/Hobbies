@@ -1,2 +1,12 @@
-<h1>User::Users#unsubscribe</h1>
-<p>Find me in app/views/user/users/unsubscribe.html.erb</p>
+
+<h3 class="unsubscribe">退会手続き</h3>
+
+<p>退会されますと、以下の情報が削除されます。</p>
+<ul>
+	<li>・登録情報</li>
+	<li>・登録したhobby情報</li>
+	<li>・マッチング情報</li>
+</ul>
+<p><b>Hobbies はこれからも様々なサービスを提供していけるように努めていきます。<br>本当に退会してもよろしいですか？<b></p>
+
+<%= link_to '退会する',user_delete_path(current_user),  "data-confirm" => "本当に退会しますか？", class: "btn btn-default btn-sm" %>

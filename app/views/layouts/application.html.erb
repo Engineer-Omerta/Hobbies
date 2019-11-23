@@ -14,13 +14,16 @@
           <% if request.path_info.include?('user') %>
           <div class="user-header">
               <div class="logo">
-                  <%= link_to 'Hobbies', user_categories_path, :style=>"color:white;" %>
+                  <%= link_to 'Hobbies', user_home_index_path, :style=>"color:white;" %>
               </div>
               <nav>
                   <% if user_signed_in? %>
                       <ul class="nav-list">
                           <li class="nav-list-item">
                               <%= link_to "ユーザー名: #{current_user.last_name} #{current_user.first_name}", user_users_mypage_path(current_user), :style=>"color:white;" %>
+                          </li>
+                          <li class="nav-list-item">
+                              <%= link_to "hobbyを登録する", user_categories_path, :style=>"color:white;" %>
                           </li>
                           <li class="nav-list-item">
                               <%= link_to "マッチング一覧", matches_user_user_path(current_user), :style=>"color:white;" %>
@@ -50,7 +53,9 @@
 
           <% elsif request.path_info.include?('admin') %>
               <div class="admin-header">
-                  <%= link_to 'Hobbies', "" %>
+                <div class="logo">
+                  <%= link_to 'Hobbies', admin_home_top_path, :style=>"color:white;" %>
+                </div>
                       <% if admin_signed_in? %>
                           <div class="admin-nav">
                               <p><b><%= link_to "管理者としてログイン中　ログアウト", destroy_admin_session_path, method: :delete, :style=>"color:white;" %></b></p>

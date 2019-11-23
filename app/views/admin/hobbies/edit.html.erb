@@ -4,10 +4,11 @@
 	</div>
 	<div class="col-lg-2 back-menu">
 		<p><%= link_to 'トップへ戻る', admin_home_top_path %></p>
+		<p><%= link_to 'カテゴリへ戻る', admin_categories_path%></p>
 	</div>
 </div>
 
-<div class="row clearfix">
+<div class="row search clearfix">
 	<div class="col-lg-4">
 	</div>
 	<div class="col-lg-4 search-box">
@@ -23,23 +24,27 @@
 	</div>
 </div>
 
-<div class="headline">
-	<p>hobbyをカテゴリから選ぶ</p>
-</div>
-
-<div class="row clearfix content-row">
-	<% @categories.each do |category| %>
-		<div class="col-lg-4 content-box">
-			<%= link_to admin_category_path(category.id) do %>
-				<div class ="content">
-					<%= attachment_image_tag category, :category_image %>
-				</div>
-				<div class="name">
-					<%= category.category_name %>
-				</div>
-			<% end %>
-			<%= link_to "カテゴリを編集する", edit_admin_category_path(category), :style=>"text-align: right;" %>
+<div class="row clearfix">
+	<div class="col-lg-7">
+		<div class="user-hobby-show-image">
+			<%= attachment_image_tag @hobby, :hobby_image %>
 		</div>
-	<% end %>
+	</div>
+	<div class="col-lg-5">
+		<p class="hobby-name-panel">
+			<%= @hobby.hobby_name %>
+		</p>
+		<p class="category-name">
+			カテゴリ：<%= @hobby.category.category_name %>
+		</p>
+	</div>
 </div>
 
+<%= form_for(@hobby, url: edit_admin_hobby_path) do |f| %>
+	<p>hobbyの名前</p>
+	<%= f.text_field :hobby_name %>
+	<p>hobbyのイメージ</p>
+	<%= f.attachment_field :hobby_image %>
+	<%= f.submit 'hobbyを編集する' %>
+	<%= link_to "hobbyを削除する", admin_hobby_path(@hobby), method: :delete %>
+<% end %>

@@ -1,0 +1,54 @@
+
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+	</div>
+</div>
+
+<div class="row clearfix">
+	<div class="col-lg-7">
+		<div class="user-show-image">
+			<%= attachment_image_tag @user, :user_icon, fallback: "no_image.jpg", size:'500x350' %>
+		</div>
+	</div>
+	<div class="col-lg-5">
+		<h3 class="user-name-panel">
+			<%= @user.nick_name %>
+		</h3>
+		<h3 class="user-info-panel">
+			<p>活動場所　<%= @user.user_location %></p>
+			<p>スタンス　<%= @user.user_stance %></p>
+			<%= link_to 'このユーザーを削除する',admin_delete_path(@user),  "data-confirm" => "本当に削除しますか？", class: "btn btn-default btn-sm" %>
+		</h3>
+	</div>
+</div>
+
+<div class="row clearfix">
+	<div class="col-lg-1"></div>
+	<div class="col-lg-10">
+		<h4>自己紹介</h4>
+		<%= @user.user_introduction %>
+		<br>
+		<br>
+		<h4>詳細な自己紹介</h4>
+		<%= @user.user_detailed_introduction %>
+	</div>
+	<div class="col-lg-1"></div>
+</div>
+
+<div class="row clearfix content-row">
+	<h3>hobby</h3>
+	<% @user.user_hobbies.each do |user_hobby| %>
+		<div class="col-lg-4 content-box">
+			<%= link_to admin_hobby_path(user_hobby.hobby.id) do %>
+				<div class="content">
+					<%= attachment_image_tag user_hobby.hobby, :hobby_image %>
+				</div>
+				<div class="name">
+					<%= user_hobby.hobby.hobby_name %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>

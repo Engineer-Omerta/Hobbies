@@ -1,2 +1,14 @@
-<h1>Admin::Categories#edit</h1>
-<p>Find me in app/views/admin/categories/edit.html.erb</p>
+
+<p class="hobby-name-panel">
+	<%= @category.category_name %>
+</p>
+<%= attachment_image_tag @category, :category_image, :fill, 350, 100, format: 'jpeg' %>
+
+<%= form_for(@category, url: admin_category_path) do |f| %>
+	<p>カテゴリの名前</p>
+	<%= f.text_field :category_name %>
+	<p>カテゴリのイメージ</p>
+	<%= f.attachment_field :category_image %>
+	<%= f.submit 'カテゴリを編集する' %>
+	<%= link_to "カテゴリを削除する", admin_category_path(@category), method: :delete %>
+<% end %>
