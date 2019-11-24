@@ -67,7 +67,7 @@
       </header>
 
 <div class = "container room-header">
-	<h1 class="room-headline"><%= link_to "＜　#{@partner.nick_name}", user_user_path(@partner.id), :style=>"color:white; background-color: #003366;" %></h1>
+	<h1 class="room-headline"><%= link_to "＜　#{@partner.nick_name}", matches_user_user_path(current_user), :style=>"color:white; background-color: #003366;" %></h1>
 </div>
 
 <div class="room-background-img">

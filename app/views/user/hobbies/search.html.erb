@@ -8,6 +8,23 @@
 	</div>
 </div>
 
+<div class="row search clearfix">
+	<div class="col-lg-4">
+	</div>
+	<div class="col-lg-4 search-box">
+		<p>hobbyを検索する</p>
+			<div class="header-search">
+                 <%= form_tag user_hobby_search_path, method: 'get' do %>
+                     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
+                     <%= submit_tag "検索", :name => nil %>
+                 <% end %> <!-- 検索フォームのend -->
+            </div>
+	</div>
+	<div class="col-lg-4">
+	</div>
+</div>
+
+
 <h4>検索結果</h4>
 
 <div class="row clearfix content-row">

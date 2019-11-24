@@ -4,7 +4,7 @@
     <title>Hobbies</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/993887c1d9.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -31,9 +31,6 @@
                           <li class="nav-list-item">
                               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, :style=>"color:white;" %>
                           </li>
-                          <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
-                          </li>
                       </ul>
                   <% else %>
                       <ul class="nav-list">
@@ -42,9 +39,6 @@
                           </li>
                           <li class="nav-list-item">
                               <%= link_to "新規会員登録", new_user_registration_path, :style=>"color:white;" %>
-                          </li>
-                          <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
                           </li>
                       </ul>
                   <% end %>
@@ -87,5 +81,6 @@
               </li>
           </ul>
       </footer>
+
   </body>
 </html>

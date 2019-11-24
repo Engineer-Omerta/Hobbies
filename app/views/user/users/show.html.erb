@@ -12,7 +12,7 @@
 			<%= attachment_image_tag @user, :user_icon, fallback: "no_image.jpg", size:'500x350' %>
 		</div>
 	</div>
-	<div class="col-lg-5">
+	<div class="col-lg-5 clearfix">
 		<h3 class="user-name-panel">
 			<%= @user.nick_name %>
 		</h3>
@@ -22,10 +22,10 @@
 		</h3>
 		<% if current_user != @user %>
 			<% if Relationship.find_by(following_id: current_user.id, follower_id: @user.id) && Relationship.find_by(following_id: @user.id, follower_id: current_user.id) %> <!-- 両方がフォローしている場合を検索 -->
-				<p>マッチング済み</p>
+				<p class="user-show-nav">マッチング済み</p>
 
 				<% if @isRoom == true %> <!-- Roomが存在しているか、存在していないかの条件分岐 -->
-					<a href="/user/rooms/<%= @roomId %>"><p class="chat-room">チャットルームへ</p></a>
+					<a href="/user/rooms/<%= @roomId %>"><p class="user-show-nav">チャットルームへ</p></a>
 				<% else %>
 					<%= form_for(@room, url: user_rooms_path) do |f| %>
 					<!-- チャットルームをcreateするためには親モデルのRoomsテーブルと、子モデルのEntriesテーブル両方にroomのレコードを保存する必要がある
@@ -39,9 +39,9 @@
 				<% end %>
 
 			<% elsif Relationship.find_by(following_id: current_user.id, follower_id: @user.id) %> <!-- 自分が一方的にフォローしている場合を検索 -->
-				<p><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
+				<p class="user-show-follow"><%=link_to "フォロー済み", user_user_relationships_path(@user.id), method: :delete %></p>
 			<% else %> <!-- その他。つまり相手が一方的にフォローしている、又は両方ともフォローしていない -->
-				<p><%=link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
+				<p class="user-show-follow"><%=link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
 			<% end %>
 		<% end %>
 	</div>

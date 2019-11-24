@@ -12,24 +12,51 @@
 	</div>
 	<div class="col-lg-4 search-box">
 		<p>hobbyを検索する</p>
-			<%= form_tag user_hobby_search_path, method: 'get' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'search-submit' %>
-			     <div class="search-box-submit">
-			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
-			     </div>
-			<% end %> <!-- 検索フォームのend -->
+			<div class="header-search">
+                 <%= form_tag user_hobby_search_path, method: 'get' do %>
+                     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
+                     <%= submit_tag "検索", :name => nil %>
+                 <% end %> <!-- 検索フォームのend -->
+            </div>
 	</div>
 	<div class="col-lg-4">
 	</div>
 </div>
 
 <div class="row content-row">
+	<% if current_user.hobbies.empty? %>
+	<div class="home-index-hobby-empty">
+		<p>ここにはあなたのhobbyに基づいたオススメのユーザーが表示されます。あなたはまだhobbyが登録されていません。</p>
+		<button type="button" class="btn btn-primary btn-lg"><%= link_to "ここからhobbyを登録しましょう。", user_categories_path, :style=>"color:white;" %></button>
+	</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	<% else %>
 	<% @randam_current_user_hobbies.each do |randam_hobby| %><!-- 今のユーザーのhobbyをランダムにとってくる -->
-		<h3>趣味　<%= randam_hobby.hobby_name %>のユーザー</h3>
+		<%= link_to user_hobby_path(randam_hobby) do %>
+			<h4 class="home-index-hobby-name">趣味　<%= randam_hobby.hobby_name %>のユーザー</h4>
+		<% end %>
 		<div class="hoge clearfix"><!-- ここのclearfixでhobbyごとに改行するように設定される -->
-			<% randam_hobby.users.each do |user_hobby| %><!-- 取ってきてるhobbyに紐付くユーザーをとってくる -->
-			<!-- ifの条件分岐でユーザーの数がn人なら空のcolを挿入など条件分岐させる？ -->
-				<div class="col-lg-4 content-box">
+			<% randam_hobby.users.shuffle.first(3).each do |user_hobby| %><!-- 取ってきてるhobbyに紐付くユーザーをとってくる -->
+				<div class="col-lg-4 user-home-content-box">
 					<div class ="content">
 						<%= link_to user_user_path(user_hobby) do %>
 							<%= attachment_image_tag user_hobby, :user_icon, fallback: "no_image.jpg" %>
@@ -41,10 +68,11 @@
 						<% end %>
 					</div>
 					<p><%= user_hobby.user_location %>で活動中</p>
-					<%= link_to truncate("#{user_hobby.user_introduction}", length: 20, omission:"..."), user_user_path(user_hobby) %>
+					<%= link_to truncate("#{user_hobby.user_introduction}", length: 32, omission:"..."), user_user_path(user_hobby) %>
 				</div>
 			<% end %>
 		</div>
+		<% end %>
 	<% end %>
 </div>
 

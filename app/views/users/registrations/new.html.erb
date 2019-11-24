@@ -5,7 +5,7 @@
 
       <p>お名前</p>
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :姓 %>
           </div>
           <div class="col-lg-10">
@@ -13,7 +13,7 @@
           </div>
       </div>
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :名 %>
           </div>
           <div class="col-lg-10">
@@ -23,7 +23,7 @@
 
       <p>お名前(フリガナ)</p>
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :姓 %>
           </div>
           <div class="col-lg-10">
@@ -31,7 +31,7 @@
           </div>
       </div>
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :名 %>
           </div>
           <div class="col-lg-10">
@@ -40,7 +40,7 @@
       </div>
 
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :ニックネーム %>
           </div>
           <div class="col-lg-10">
@@ -50,7 +50,7 @@
       </div>
 
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :メールアドレス %>
           </div>
           <div class="col-lg-10">
@@ -59,7 +59,7 @@
       </div>
 
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :大まかな活動場所 %>
           </div>
           <div class="col-lg-10">
@@ -68,7 +68,7 @@
       </div>
 
       <div class="field row">
-          <div class="form col-lg-2">
+          <div class="user-registration-form col-lg-2">
               <%= f.label :詳細な活動場所 %>
           </div>
           <div class="col-lg-10">
@@ -81,7 +81,7 @@
           <div class="col-lg-2">
               <%= f.label :パスワード %>
           </div>
-          <div class="form col-lg-10">
+          <div class="user-registration-form col-lg-10">
               <%= f.password_field :password, autocomplete: "new-password" %>
               <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> 文字以下で入力してください)</em>
@@ -93,7 +93,7 @@
           <div class="col-lg-2">
               <%= f.label :パスワード（確認） %>
           </div>
-          <div class="form col-lg-10">
+          <div class="user-registration-form col-lg-10">
               <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
               <em>(確認のため、もう一度入力してください)</em>
           </div>
@@ -102,4 +102,6 @@
   <div class="actions">
     <%= f.submit "会員登録", class:"btn btn-primary"%>
   </div>
+  <br>
+  <br>
     <% end %>

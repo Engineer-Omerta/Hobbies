@@ -30,4 +30,35 @@ class User < ApplicationRecord
     # 今自分(引数のuser)がフォローしようとしているユーザーが、フォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?
   end
+
+  def last_message(user) #ここの引数はmatch.htmlのuser.last_message()の引数の事
+    @currentUserEntry = Entry.where(user_id: user.id)
+    @userEntry = Entry.where(user_id: self.id)
+     @currentUserEntry.each do |cu| #current_userのEntryを全て取り出す
+        @userEntry.each do |u| #@userのEntryを全て取り出す
+          if cu.room_id == u.room_id then #取り出した互いのEntryのroom_idが共通していれば下記を実行する (thenとは条件式がtrueなら下記を実行するという意味)
+             @roomId = cu.room_id #互いのroom_idが共通していればroom_idにそのidを入れてやる
+          end
+        end
+      end
+      message = Message.where(room_id: @roomId).last
+    return message.message
+    #selfはここではuserの事。
+    #find_byでそのメッセージのルームIDを特定して、かつその最後の一件を取得する
+    #returnでその行の内容をviewに返す　今定義したmessageの中のmessageカラムを呼び出している
+  end
+
+  def last_message_time(user)
+    @currentUserEntry = Entry.where(user_id: user.id)
+    @userEntry = Entry.where(user_id: self.id)
+     @currentUserEntry.each do |cu| #current_userのEntryを全て取り出す
+        @userEntry.each do |u| #@userのEntryを全て取り出す
+          if cu.room_id == u.room_id then #取り出した互いのEntryのroom_idが共通していれば下記を実行する (thenとは条件式がtrueなら下記を実行するという意味)
+             @roomId = cu.room_id #互いのroom_idが共通していればroom_idにそのidを入れてやる
+          end
+        end
+      end
+      message = Message.where(room_id: @roomId).last
+    return message.created_at.strftime("%m/%d %H:%M")
+  end
 end

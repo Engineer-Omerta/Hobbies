@@ -1,5 +1,6 @@
 class User::HomeController < ApplicationController
   def top
+    render layout: false #application.html.erbを適用したくない時に使う
   end
 
   def index

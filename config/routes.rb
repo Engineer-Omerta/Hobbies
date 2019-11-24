@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_scope :user do #deviseのログイン画面をrootにする記述
-    root :to => "devise/sessions#new"
+    root :to => 'user/home#top'
   end
 
   namespace :user do

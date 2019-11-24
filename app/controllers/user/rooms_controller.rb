@@ -1,4 +1,5 @@
 class User::RoomsController < ApplicationController
+  before_action :authenticate #application_controllerで定義済み　ログインしていなければhome/topへ飛ばす
   def show
   	@room = Room.find(params[:id])
     if Entry.where(:user_id => current_user.id, :room_id => @room.id).present?

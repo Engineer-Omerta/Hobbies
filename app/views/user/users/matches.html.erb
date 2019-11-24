@@ -1,14 +1,32 @@
 
-<h1>マッチング済みユーザー一覧</h1>
-<p><%= link_to 'フォローしているユーザー一覧', follows_user_user_path(current_user) %></p>
-<p><%= link_to 'フォローされているユーザー一覧', followers_user_user_path(current_user) %></p>
+<div class="row">
+	<div class="col-lg-9">
+	</div>
+	<div class="col-lg-3 back-menu">
+		<p><%= link_to 'フォローしているユーザー一覧', follows_user_user_path(current_user) %></p>
+		<p><%= link_to 'フォローされているユーザー一覧', followers_user_user_path(current_user) %></p>
+	</div>
+</div>
+
+<h3>マッチング済みユーザー一覧</h3>
 
 <% @users.each do |user| %>
-	<div class="match-user">
+	<div class="match-user clearfix">
 		<%= link_to user_user_path(user) do %>
-			<%= attachment_image_tag user, :user_icon, :fill, 150, 150, fallback: "no_image.jpg" %>
+			<div class="match-user-icon">
+				<%= attachment_image_tag user, :user_icon, :fill, 150, 150, fallback: "no_image.jpg" %>
+			</div>
 		<% end %>
-		<%= user.nick_name %>
-		<p><%= user.user_location %>で活動中</p>
+		<div class="match-user-info">
+			<div class="match-user-name">
+				<%= user.nick_name %>
+			</div>
+			<div class="match-user-chat">
+				<%= user.last_message(current_user) %><!-- ここの引数はuser.rb内のlast_message()の引数に入る -->
+			</div>
+			<div class="match-user-chat-time">
+				<%= user.last_message_time(current_user) %>
+			</div>
+		</div>
 	</div>
 <% end %>

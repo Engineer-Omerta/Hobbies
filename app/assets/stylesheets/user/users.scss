@@ -1,3 +1,41 @@
 // Place all the styles related to the user/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-mypage-unsubscribe{
+	text-align: right;
+	margin-bottom: 50px;
+}
+
+.user-show-nav{
+  width: 215px;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: black;/*文字色*/
+  background: #FFF;
+  border: solid 2px black;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  margin: 0 auto;
+  margin-bottom: 5px;
+  text-align: center;
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.user-show-follow{
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: black;/*文字色*/
+  background: #FFF;
+  border: solid 2px black;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  margin-bottom: 5px;
+  text-align: center;
+  margin: 0 10px 10px 0;
+}
+
+.user-registration-form {
+  margin-bottom: 20px;
+}

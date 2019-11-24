@@ -1,4 +1,5 @@
 class User::HobbiesController < ApplicationController
+  before_action :authenticate #application_controllerで定義済み　ログインしていなければhome/topへ飛ばす
   def index
 
   end

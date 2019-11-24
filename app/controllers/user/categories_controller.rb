@@ -1,4 +1,5 @@
 class User::CategoriesController < ApplicationController
+    before_action :authenticate #application_controllerで定義済み　ログインしていなければhome/topへ飛ばす
   def index
   	@categories = Category.all
   end
