@@ -34,7 +34,7 @@
 							<%= e.hidden_field :user_id, :value=> @user.id %>
 							<!-- Entriesテーブルのレコードにはuser_idを送る必要がある？？ので、hidden_fieldでvalueを使って@user.idを送る -->
 						<% end %>
-						<%= f.submit "チャットを始める" %>
+						<p class="user-show-start-chat"><%= f.submit "チャットを始める", class:"btn user-show-start-chat-submit btn-primary" %></p>
 					<% end %>
 				<% end %>
 

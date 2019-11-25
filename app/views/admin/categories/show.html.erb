@@ -13,12 +13,10 @@
 	</div>
 	<div class="col-lg-4 search-box">
 		<p>hobbyを検索する</p>
-			<%= form_tag admin_hobby_search_path, method: 'get',class: 'form-box' do %><!-- form_tagはDBの変更に関わらない時に使う記述 -->
-			     <%= text_field_tag :search, params[:search], placeholder: "hobby名",class: 'form-search' %>
-			     <div class="form-submit">
-			     	<%= submit_tag "検索",class: 'form-search', :name => nil %><!-- :name => nilが意味不明 -->
-			     </div>
-			<% end %> <!-- 検索フォームのend -->
+			<%= form_tag admin_hobby_search_path, method: 'get' do %>
+                     <%= text_field_tag :search, params[:search], placeholder: "hobby名" %>
+                     <%= submit_tag "検索", :name => nil %>
+            <% end %> <!-- 検索フォームのend -->
 	</div>
 	<div class="col-lg-4">
 	</div>

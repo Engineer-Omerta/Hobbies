@@ -24,6 +24,15 @@ class User < ApplicationRecord
   # 中間テーブルを介して「following」モデルのUser(フォローする側)を集めることを「followers」とrelationshipモデルで定義している
   attachment :user_icon
 
+  validates :last_name, presence: :true
+  validates :first_name, presence: :true
+  validates :last_name_ruby, presence: :true
+  validates :first_name_ruby, presence: :true
+  validates :nick_name, presence: :true
+  validates :user_location, presence: :true
+  validates :user_introduction, presence: :true
+  validates :user_stance, presence: :true
+
   acts_as_paranoid
 
   def followed_by?(user)
@@ -31,9 +40,9 @@ class User < ApplicationRecord
     passive_relationships.find_by(following_id: user.id).present?
   end
 
-  def last_message(user) #ここの引数はmatch.htmlのuser.last_message()の引数の事
-    @currentUserEntry = Entry.where(user_id: user.id)
-    @userEntry = Entry.where(user_id: self.id)
+  def last_message(current_user, user) #ここの引数はmatch.htmlのuser.last_message()の引数の事
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: user.id)
      @currentUserEntry.each do |cu| #current_userのEntryを全て取り出す
         @userEntry.each do |u| #@userのEntryを全て取り出す
           if cu.room_id == u.room_id then #取り出した互いのEntryのroom_idが共通していれば下記を実行する (thenとは条件式がtrueなら下記を実行するという意味)
@@ -41,16 +50,21 @@ class User < ApplicationRecord
           end
         end
       end
-      message = Message.where(room_id: @roomId).last
-    return message.message
+      if Message.where(room_id: @roomId).last
+        message_text = Message.where(room_id: @roomId).last #messageレコードの最後を取得
+        return message_text.message
+      else
+        message_body = "まだメッセージのやりとりがありません。"
+        return message_body
+      end
     #selfはここではuserの事。
     #find_byでそのメッセージのルームIDを特定して、かつその最後の一件を取得する
     #returnでその行の内容をviewに返す　今定義したmessageの中のmessageカラムを呼び出している
   end
 
-  def last_message_time(user)
-    @currentUserEntry = Entry.where(user_id: user.id)
-    @userEntry = Entry.where(user_id: self.id)
+  def last_message_time(current_user, user)
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: user.id)
      @currentUserEntry.each do |cu| #current_userのEntryを全て取り出す
         @userEntry.each do |u| #@userのEntryを全て取り出す
           if cu.room_id == u.room_id then #取り出した互いのEntryのroom_idが共通していれば下記を実行する (thenとは条件式がtrueなら下記を実行するという意味)
@@ -58,7 +72,11 @@ class User < ApplicationRecord
           end
         end
       end
-      message = Message.where(room_id: @roomId).last
-    return message.created_at.strftime("%m/%d %H:%M")
+      if message_time = Message.where(room_id: @roomId).last
+        return message_time.created_at.strftime("%m/%d %H:%M")
+      else
+        message_time = ""
+        return message_time
+      end
   end
 end

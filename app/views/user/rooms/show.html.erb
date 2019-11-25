@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <div id="wrapper">
       <header>
           <% if request.path_info.include?('user') %>
           <div class="user-header">
@@ -146,5 +147,6 @@
               </li>
           </ul>
       </footer>
+    </div>
   </body>
 </html>

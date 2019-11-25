@@ -1,13 +1,62 @@
 
-<h1>カテゴリ新規追加</h1>
+<div class="row">
+	<div class="col-lg-10">
+	</div>
+	<div class="col-lg-2 back-menu">
+		<p><%= link_to 'カテゴリへ戻る', admin_categories_path %></p>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-lg-4"></div>
+	<div class="col-lg-4 actions">
+		<h3>カテゴリを新規作成する</h3>
+		<br>
+	</div>
+	<div class="col-lg-4"></div>
+</div>
 
 <%= form_for [@category], url: admin_categories_path do |f| %>
-	<p>カテゴリの名前</p>
-	<%= f.text_area :category_name, class: "category_new_box" %>
+	<div class="field row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-2">
+			<p>カテゴリのイメージ</p>
+		</div>
+		<div class="col-lg-3">
+			<%= f.attachment_field :category_image %>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
 
-	<p>カテゴリのイメージ</p>
-	<%= f.attachment_field :category_image %>
+	<div class="field row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-2">
+			<p>カテゴリの名前</p>
+		</div>
+		<div class="col-lg-3">
+			<%= f.text_area :category_name, class: "category_new_box" %>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
 
-	<%= f.submit '送信する', class:"category-submit" %>
+	<div class="field row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="actions">
+                <%= f.submit "作成する", class:"btn btn-lg btn-primary" %>
+            </div>
+        </div>
+        <div class="col-lg-4　hobby-new"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 <% end %>

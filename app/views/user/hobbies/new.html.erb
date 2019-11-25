@@ -23,22 +23,59 @@
 	</div>
 </div>
 
-<h1>hobbyを新規作成する</h1>
+<div class="row">
+	<div class="col-lg-4"></div>
+	<div class="col-lg-4 actions">
+		<h3>hobbyを新規作成する</h3>
+		<br>
+	</div>
+	<div class="col-lg-4"></div>
+</div>
 
 <%= form_for [@hobby], url: user_hobbies_path do |f| %>
-	<p>hobbyの名前</p>
-	<%= f.text_area :hobby_name, class: "hobby_new_box" %>
+	<div class="field row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-2">
+			<p>hobbyのイメージ</p>
+		</div>
+		<div class="col-lg-3">
+			<%= f.attachment_field :hobby_image %>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
 
-	<p>hobbyのイメージ</p>
-	<%= f.attachment_field :hobby_image %>
+	<div class="field row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-2">
+			<p>hobbyの名前</p>
+		</div>
+		<div class="col-lg-3">
+			<%= f.text_field :hobby_name, class: "hobby_new_box" %>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
 
-	<p>hobbyのカテゴリ</p>
-	<%= f.collection_select :category_id, Category.all, :id, :category_name, :prompt => "カテゴリを選択" %>
+	<div class="field row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-2">
+			<p>hobbyのカテゴリ</p>
+		</div>
+		<div class="col-lg-3">
+			<%= f.collection_select :category_id, Category.all, :id, :category_name, :prompt => "カテゴリを選択" %>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
 
-	<%= f.submit '作成する', class:"hobby-submit" %>
+	<div class="field row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="actions">
+                <%= f.submit "作成する", class:"btn btn-lg btn-primary" %>
+            </div>
+        </div>
+        <div class="col-lg-4　hobby-new">
+        	<p>※hobby名は20文字以内で入力してください。</p>
+			<p>※カテゴリはhobbyの内容を表すものを選択してください。</p>
+        </div>
+    </div>
 <% end %>
-
-<p>※hobby名は20文字以内で入力してください。</p>
-<p>※カテゴリはhobbyの内容を表すものを選択してください。</p>
-<p>※作成する前に、作成のルールをお読みください。</p>
-

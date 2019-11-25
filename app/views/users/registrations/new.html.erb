@@ -78,6 +78,33 @@
       </div>
 
       <div class="field row">
+          <div class="user-registration-form col-lg-2">
+              <%= f.label :スタンス %>
+          </div>
+          <div class="col-lg-10">
+              <%= f.label :user_stance, :初心者 %>
+              <%= f.radio_button :user_stance, "初心者" %>
+              <%= f.label :user_stance, :経験者 %>
+              <%= f.radio_button :user_stance, "経験者" %>
+              <%= f.label :user_stance, :友達探し %>
+              <%= f.radio_button :user_stance, "友達探し" %>
+              <%= f.label :user_stance, :まったり %>
+              <%= f.radio_button :user_stance, "まったり" %>
+              <%= f.label :user_stance, :本気 %>
+              <%= f.radio_button :user_stance, "本気" %>
+          </div>
+      </div>
+
+      <div class="field row">
+          <div class="user-registration-form col-lg-2">
+              <%= f.label :自己紹介 %>
+          </div>
+          <div class="col-lg-10">
+              <%= f.text_area :user_introduction, class: "user-edit-form-box" %>
+          </div>
+      </div>
+
+      <div class="field row">
           <div class="col-lg-2">
               <%= f.label :パスワード %>
           </div>

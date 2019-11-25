@@ -14,7 +14,7 @@
 	<div class="match-user clearfix">
 		<%= link_to user_user_path(user) do %>
 			<div class="match-user-icon">
-				<%= attachment_image_tag user, :user_icon, :fill, 150, 150, fallback: "no_image.jpg" %>
+				<%= attachment_image_tag user, :user_icon, :fill, 100, 100, fallback: "no_image.jpg" %>
 			</div>
 		<% end %>
 		<div class="match-user-info">
@@ -22,10 +22,10 @@
 				<%= user.nick_name %>
 			</div>
 			<div class="match-user-chat">
-				<%= user.last_message(current_user) %><!-- ここの引数はuser.rb内のlast_message()の引数に入る -->
+				<%= user.last_message(current_user,user) %><!-- ここの引数はuser.rb内のlast_message()の引数に入る -->
 			</div>
 			<div class="match-user-chat-time">
-				<%= user.last_message_time(current_user) %>
+				<%= user.last_message_time(current_user,user) %>
 			</div>
 		</div>
 	</div>
