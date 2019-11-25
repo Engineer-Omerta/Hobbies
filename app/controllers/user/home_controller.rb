@@ -15,4 +15,16 @@ class User::HomeController < ApplicationController
 
   def location
   end
+
+  def caution
+  end
+
+  def terms
+  end
+
+  def privacy
+  end
+
+  def rule
+  end
 end

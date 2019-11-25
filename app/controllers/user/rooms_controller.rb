@@ -25,6 +25,6 @@ class User::RoomsController < ApplicationController
     #current_userに対しては、@entry1とし、EntriesテーブルにRoom.createで作成された@roomにひもづくidと、current_userのidを保存させる記述する
     @entry2 = Entry.create(params.require(:entry).permit(:user_id, :room_id).merge(:room_id => @room.id))
     #users/show.html.erbのfields_for @entryで保存したparamsの情報(:user_id, :room_id)を許可し、current_userと同じく@roomにひもづくidを保存する記述
-    redirect_to "user/rooms/#{@room.id}"
+    redirect_to user_room_path(@room.id)
   end
 end

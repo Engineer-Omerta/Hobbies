@@ -12,9 +12,9 @@ class User::HobbiesController < ApplicationController
     # ストロングパラメーターを使用 refileを使って画像をカラムに保存する場合、カラム名の末尾に_idをつけること！！
     hobby = Hobby.new(hobby_params)
     # DBへ保存する
-    hobby.save
+    hobby.save!
     #リダイレクト
-    redirect_to new_user_hobby_path
+    redirect_to user_hobby_path(hobby.id)
   end
 
   def show

@@ -30,9 +30,6 @@
                           <li class="nav-list-item">
                               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, :style=>"color:white;" %>
                           </li>
-                          <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
-                          </li>
                       </ul>
                   <% else %>
                       <ul class="nav-list">
@@ -41,9 +38,6 @@
                           </li>
                           <li class="nav-list-item">
                               <%= link_to "新規会員登録", new_user_registration_path, :style=>"color:white;" %>
-                          </li>
-                          <li class="nav-list-item">
-                              <%= link_to "お問い合わせ", "", :style=>"color:white;" %>
                           </li>
                       </ul>
                   <% end %>
@@ -90,16 +84,16 @@
                   <p>ⓒ2019 Hobbies</p>
               </li>
               <li class="footer-nav-list-item">
-                  <%= link_to "ご利用にあたっての注意点", "", :style=>"color:white;" %>
+                  <%= link_to "ご利用にあたっての注意点", user_home_caution_path, :style=>"color:white;" %>
               </li>
               <li class="footer-nav-list-item">
-                  <%= link_to "利用規約", "", :style=>"color:white;" %>
+                  <%= link_to "利用規約", user_home_terms_path, :style=>"color:white;" %>
               </li>
               <li class="footer-nav-list-item">
-                  <%= link_to "プライバシーポリシー", "", :style=>"color:white;" %>
+                  <%= link_to "プライバシーポリシー", user_home_privacy_path, :style=>"color:white;" %>
               </li>
               <li class="footer-nav-list-item">
-                  <%= link_to "hobby作成のルール", "", :style=>"color:white;" %>
+                  <%= link_to "hobby作成のルール", user_home_rule_path, :style=>"color:white;" %>
               </li>
           </ul>
       </footer>
