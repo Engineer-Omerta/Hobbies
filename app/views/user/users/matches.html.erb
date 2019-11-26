@@ -8,25 +8,35 @@
 	</div>
 </div>
 
-<h3>マッチング済みユーザー一覧</h3>
+<div class="match-index">
+	<h3>マッチング済みユーザー一覧</h3>
+</div>
 
-<% @users.each do |user| %>
-	<div class="match-user clearfix">
-		<%= link_to user_user_path(user) do %>
-			<div class="match-user-icon">
-				<%= attachment_image_tag user, :user_icon, :fill, 100, 100, fallback: "no_image.jpg" %>
+<div class="row">
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8">
+		<% @users.each do |user| %>
+			<div class="match-user clearfix">
+				<%= link_to user_user_path(user) do %>
+					<div class="match-user-icon">
+						<%= attachment_image_tag user, :user_icon, :fill, 100, 100, fallback: "no_image.jpg" %>
+					</div>
+				<% end %>
+				<div class="match-user-info">
+					<div class="match-user-name">
+						<%= user.nick_name %>
+					</div>
+					<div class="match-user-chat">
+						<%= user.last_message(current_user,user) %><!-- ここの引数はuser.rb内のlast_message()の引数に入る -->
+					</div>
+					<div class="match-user-chat-time">
+						<%= user.last_message_time(current_user,user) %>
+					</div>
+				</div>
 			</div>
 		<% end %>
-		<div class="match-user-info">
-			<div class="match-user-name">
-				<%= user.nick_name %>
-			</div>
-			<div class="match-user-chat">
-				<%= user.last_message(current_user,user) %><!-- ここの引数はuser.rb内のlast_message()の引数に入る -->
-			</div>
-			<div class="match-user-chat-time">
-				<%= user.last_message_time(current_user,user) %>
-			</div>
-		</div>
 	</div>
-<% end %>
+	<div class="col-lg-2"></div>
+</div>
+<br>
+<br>

@@ -13,7 +13,9 @@
       <header>
           <div class="user-header">
               <div class="logo">
-                  <%= link_to 'Hobbies', user_home_index_path, :style=>"color:white;" %>
+                  <%= link_to new_user_session_path do %>
+                      <%= image_tag 'Hobbies_logo7.png', width: "100px" %>
+                  <% end %>
               </div>
               <nav>
                   <% if user_signed_in? %>
@@ -45,43 +47,56 @@
           </div>
       </header>
       <div class = "container">
-			<div class="top-main-visual">
-			    <div class="theTarget">
-			        <img src="<%= asset_path "top1.jpg" %>" style="background-image: cover">
-			        <img src="<%= asset_path "top2.jpg" %>" style="background-image: cover">
-			        <img src="<%= asset_path "top5.jpg" %>" style="background-image: cover">
-			        <img src="<%= asset_path "top4.jpg" %>" style="background-image: cover">
-			    </div>
-			</div>
+    			<div class="top-main-visual">
+    			    <div class="theTarget">
+    			        <img src="<%= asset_path "top1.jpg" %>" style="background-image: cover">
+    			        <img src="<%= asset_path "top2.jpg" %>" style="background-image: cover">
+    			        <img src="<%= asset_path "top5.jpg" %>" style="background-image: cover">
+    			        <img src="<%= asset_path "top4.jpg" %>" style="background-image: cover">
+    			    </div>
+    			</div>
 
-			<div class="top-headline">
-				<h3>Hobbiesへようこそ。</h3>
-				<br>
-				<p>ここでは同じ趣味を持つ仲間を簡単に探す事が出来ます。</p>
-				<button type="button" class="btn btn-primary btn-lg"><%= link_to "会員登録して仲間を探す", new_user_registration_path, :style=>"color:white;" %></button>
-			</div>
-			<br>
-			<br>
-			<br>
-			<div class="row search clearfix">
-				<div class="col-lg-6 top-introduction">
-					<h4>Hobbiesとは？</h4>
-					<p>Hobbiesとは、同じ趣味のユーザー同士を繋げる、マッチング型のSNSアプリケーションです。<br>単身赴任や引っ越したばかり見知らぬ土地で、友達がほしいと思った事はありませんか？<br>または自主映画の制作や猟銃射撃等、あなたのニッチな趣味を共有出来る仲間がほしいと思った事はありませんか？</p>
-					<p>Hobbiesで仲間を探しましょう。</p>
-				</div>
-				<div class="col-lg-6 top-image">
-					<%= image_tag 'top3.jpg', :size =>'500x300' %>
-				</div>
-			</div>
-					<div class="top-how-to-use">
-						<p>Hobbiesの使い方は簡単です。</p>
-						<p>あなたのhobbyをどんどん追加して、気になるユーザーをフォローしましょう。<br>もし相手もあなたの事が気になれば、マッチングが成立し、お互いの所在地等、詳細な情報を確認できます。</p>
-					</div>
-		</div>
+    			<div class="top-headline">
+    				<h3>Hobbiesへようこそ。</h3>
+    				<br>
+    				<p>ここでは同じ趣味を持つ仲間を簡単に探す事が出来ます。</p>
+    				<button type="button" class="btn btn-primary btn-lg"><%= link_to "会員登録して仲間を探す", new_user_registration_path, :style=>"color:white;" %></button>
+    			</div>
+    			<br>
+    			<br>
+    			<br>
+
+          <div class="row search clearfix">
+              <div class="col-lg-6 top-introduction">
+                  <h4>Hobbiesとは？</h4>
+                  <p>Hobbiesとは、同じ趣味のユーザー同士を繋げる、マッチング型のSNSアプリケーションです。<br>単身赴任や引っ越したばかり見知らぬ土地で、友達がほしいと思った事はありませんか？<br>または自主映画の制作や猟銃射撃等、あなたのニッチな趣味を共有出来る仲間がほしいと思った事はありませんか？</p>
+                  <p>Hobbiesで仲間を探しましょう。</p>
+              </div>
+              <div class="col-lg-6 top-image">
+                  <%= image_tag 'top3.jpg', :size =>'500x300' %>
+              </div>
+          </div>
+
+          <div class="row top-how-to-use-box clearfix">
+              <div class="col-lg-6 top-image">
+                  <%= image_tag 'top6.jpg', :size =>'500x300' %>
+              </div>
+              <div class="col-lg-6 top-how-to-use">
+                  <h4>Hobbiesの使い方は簡単です。</h4>
+                  <p>あなたのhobbyをどんどん追加して、気になるユーザーをフォローしましょう。<br>もし相手もあなたの事が気になれば、マッチングが成立し、お互いの所在地等、詳細な情報を確認できます。</p>
+              </div>
+          </div>
+              <br>
+              <br>
+              <br>
+		  </div>
       <footer clearfix>
           <ul class="footer-nav-list">
               <li class="c-Hobbies">
                   <p>ⓒ2019 Hobbies</p>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "About", user_home_top_path, :style=>"color:white;" %>
               </li>
               <li class="footer-nav-list-item">
                   <%= link_to "ご利用にあたっての注意点", user_home_caution_path, :style=>"color:white;" %>

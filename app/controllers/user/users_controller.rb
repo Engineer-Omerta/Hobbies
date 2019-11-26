@@ -1,5 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate #application_controllerで定義済み　ログインしていなければhome/topへ飛ばす
+  before_action :correct_user, only: [:edit, :update, :follows, :followers, :unsubscribe, :delete]
 
   def show
     @user = User.find(params[:id])
@@ -69,5 +70,11 @@ class User::UsersController < ApplicationController
   def user_params
       params.require(:user).permit(:user_icon, :nick_name, :email, :user_location, :user_detailed_location,
                                    :user_stance, :user_introduction, :user_detailed_introduction)
+  end
+  def correct_user
+    @user = User.find(params[:id])
+    if current_user != @user
+       redirect_to user_home_top_path
+    end
   end
 end

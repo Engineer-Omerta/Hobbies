@@ -16,7 +16,9 @@
         <!-- 先にadmin側の記述をしないとadminでuserのついたURLを開いたときにuser側のヘッダーが表示されてしまう -->
               <div class="admin-header">
                 <div class="logo">
-                  <%= link_to 'Hobbies', admin_home_top_path, :style=>"color:white;" %>
+                  <%= link_to admin_home_top_path do %>
+                      <%= image_tag 'Hobbies_logo7.png', width: "100px" %>
+                  <% end %>
                 </div>
                       <% if admin_signed_in? %>
                           <div class="nav-list">
@@ -27,7 +29,9 @@
           <% elsif request.path_info.include?('user') %>
           <div class="user-header">
               <div class="logo">
-                  <%= link_to 'Hobbies', user_home_index_path, :style=>"color:white;" %>
+                  <%= link_to new_user_session_path do %>
+                      <%= image_tag 'Hobbies_logo7.png', width: "100px" %>
+                  <% end %>
               </div>
               <nav>
                   <% if user_signed_in? %>
@@ -67,6 +71,9 @@
           <ul class="footer-nav-list">
               <li class="c-Hobbies">
                   <p>ⓒ2019 Hobbies</p>
+              </li>
+              <li class="footer-nav-list-item">
+                  <%= link_to "About", user_home_top_path, :style=>"color:white;" %>
               </li>
               <li class="footer-nav-list-item">
                   <%= link_to "ご利用にあたっての注意点", user_home_caution_path, :style=>"color:white;" %>
