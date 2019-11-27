@@ -68,26 +68,35 @@
           <%= yield %>
       </div>
       <footer clearfix>
-          <ul class="footer-nav-list">
-              <li class="c-Hobbies">
-                  <p>ⓒ2019 Hobbies</p>
-              </li>
-              <li class="footer-nav-list-item">
-                  <%= link_to "About", user_home_top_path, :style=>"color:white;" %>
-              </li>
-              <li class="footer-nav-list-item">
-                  <%= link_to "ご利用にあたっての注意点", user_home_caution_path, :style=>"color:white;" %>
-              </li>
-              <li class="footer-nav-list-item">
-                  <%= link_to "利用規約", user_home_terms_path, :style=>"color:white;" %>
-              </li>
-              <li class="footer-nav-list-item">
-                  <%= link_to "プライバシーポリシー", user_home_privacy_path, :style=>"color:white;" %>
-              </li>
-              <li class="footer-nav-list-item">
-                  <%= link_to "hobby作成のルール", user_home_rule_path, :style=>"color:white;" %>
-              </li>
-          </ul>
+        <% if request.path_info.include?('admin') %>
+        <!-- 先にadmin側の記述をしないとadminでuserのついたURLを開いたときにuser側のヘッダーが表示されてしまう -->
+              <ul class="footer-nav-list">
+                  <li class="admin-c-Hobbies">
+                      <p>ⓒ2019 Hobbies</p>
+                  </li>
+              </ul>
+          <% elsif request.path_info.include?('user') %>
+              <ul class="footer-nav-list">
+                  <li class="c-Hobbies">
+                      <p>ⓒ2019 Hobbies</p>
+                  </li>
+                  <li class="footer-nav-list-item">
+                      <%= link_to "About", user_home_top_path, :style=>"color:white;" %>
+                  </li>
+                  <li class="footer-nav-list-item">
+                      <%= link_to "ご利用にあたっての注意点", user_home_caution_path, :style=>"color:white;" %>
+                  </li>
+                  <li class="footer-nav-list-item">
+                      <%= link_to "利用規約", user_home_terms_path, :style=>"color:white;" %>
+                  </li>
+                  <li class="footer-nav-list-item">
+                      <%= link_to "プライバシーポリシー", user_home_privacy_path, :style=>"color:white;" %>
+                  </li>
+                  <li class="footer-nav-list-item">
+                      <%= link_to "hobby作成のルール", user_home_rule_path, :style=>"color:white;" %>
+                  </li>
+              </ul>
+          <% end %>
       </footer>
     </div>
   </body>
