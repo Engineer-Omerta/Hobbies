@@ -33,7 +33,7 @@ class User::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_back fallback_location: request.referrer
+    redirect_to user_users_mypage_path
   end
 
   def matches

@@ -7,6 +7,21 @@
 	</div>
 </div>
 
+<% if flash[:notice] %>
+	<div class="hobby-show-flash-create">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<div class="error-m">
+	<% if @category.errors.any? %>
+		<%= @category.errors.count %>件のエラーがあります
+	    <% @category.errors.full_messages.each do |message| %>
+	    	<li><%= message %></li>
+	    <% end %>
+	<% end %>
+</div>
+
 <div class="row">
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4 actions">
@@ -46,7 +61,9 @@
                 <%= f.submit "作成する", class:"btn btn-lg btn-primary" %>
             </div>
         </div>
-        <div class="col-lg-4　hobby-new"></div>
+        <div class="col-lg-4　hobby-new">
+        	<p>※カテゴリ名は20文字以内で入力してください。</p>
+        </div>
     </div>
     <br>
     <br>

@@ -6,7 +6,8 @@ class Hobby < ApplicationRecord
 	attachment :hobby_image
 	has_many :users, through: :user_hobbies #トップページでランダムなhobbyからそれに紐付くユーザーをとってくるのに必要な記述
 
-	validates :hobby_name, presence: :true
+	validates :hobby_name, presence: :true,
+	           length: { maximum: 20 }
 	validates :hobby_image, presence: :true
 
 	def favorited_by?(user) #メソッドを定義しているだけなのでこの名前でいい。

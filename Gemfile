@@ -72,6 +72,7 @@ gem 'pry-byebug'
 gem "hirb"
 gem "hirb-unicode"
 gem "mini_magick"
+gem 'rails-i18n' #devise日本語化gem 参考にする場合はconfig/locals/にdevise.ja.ymlというファイルを作り、中の内容をコピーすること
 
 group :production do
   gem 'mysql2'

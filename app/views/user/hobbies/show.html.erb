@@ -24,6 +24,12 @@
 	</div>
 </div>
 
+<% if flash[:notice] %> <!-- hobbyコントローラーのcreate参照 -->
+	<div class="hobby-show-flash-create">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
 <div class="row clearfix">
 	<div class="col-lg-7">
 		<div class="user-hobby-show-image">
@@ -62,3 +68,6 @@
 		</div>
 	<% end %>
 </div>
+
+<br>
+<br>

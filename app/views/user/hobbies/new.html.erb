@@ -23,6 +23,15 @@
 	</div>
 </div>
 
+<div class="error-m">
+	<% if @hobby.errors.any? %>
+		<%= @hobby.errors.count %>件のエラーがあります
+	    <% @hobby.errors.full_messages.each do |message| %>
+	    	<li><%= message %></li>
+	    <% end %>
+	<% end %>
+</div>
+
 <div class="row">
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4 actions">
