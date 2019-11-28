@@ -26,8 +26,9 @@ class User < ApplicationRecord
 
   validates :last_name, presence: :true
   validates :first_name, presence: :true
-  validates :last_name_ruby, presence: :true
-  validates :first_name_ruby, presence: :true
+  validates :last_name_ruby, presence: :true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
+  validates :first_name_ruby, presence: :true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
+  #カタカナ入力のバリデーション
   validates :nick_name, presence: :true
   validates :user_location, presence: :true
   validates :user_introduction, presence: :true
